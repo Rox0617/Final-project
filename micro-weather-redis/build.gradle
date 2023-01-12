@@ -20,6 +20,9 @@ dependencies {
 	//HttpClient
 	implementation group: 'org.apache.httpcomponents:httpclient:4.5.13'
 	
+	    //Redis
+    compile 'org.springframework.boot:spring-boot-starter-data-redis'
+	
 	// This dependency is used for the test phase
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

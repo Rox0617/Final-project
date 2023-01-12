@@ -1,0 +1,29 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.6.13'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.example.spring.cloud'
+version = '1.0.0'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+	// This dependency is used during the compile phase
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	
+	//HttpClient
+	implementation group: 'org.apache.httpcomponents:httpclient:4.5.13'
+	
+	// This dependency is used for the test phase
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

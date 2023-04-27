@@ -1,0 +1,14 @@
+server:
+  port: 30001   #端口号
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:30001/eureka/   #注册中心地址
+  instance:
+    prefer-ip-address: true    #提交ip信息
+    hostname: localhost
+spring:
+  application:
+    name: eureka-service   #注册到服务中心的名称

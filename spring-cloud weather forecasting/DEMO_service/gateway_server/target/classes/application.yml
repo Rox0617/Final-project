@@ -1,0 +1,48 @@
+server:
+  port: 30007   #端口号
+spring:
+  application:
+    name: gateway-service    #注册到服务中心的名称
+  main:
+    allow-circular-references: true
+  cloud:
+    gateway:
+      globalcors:
+        add-to-simple-url-handler-mapping: true #解决options请求被拦截问题
+        cors-configurations:
+          '[/**]': #  匹配所有的请求
+            allowedOriginPatterns: "*"    #跨域处理，允许所有的域
+            allowedMethods:
+            - "GET"
+            - "POST"
+            - "DELETE"
+            - "PUT"
+            - "OPTIONS"
+            allowedHeaders: "*"
+            allowCredentials: true
+            maxAge: 360000
+      discovery:
+        locator:
+          enabled: true    #默认值为true  即默认开启注册中心动态创建路由的功能,利用微服务名进行路由
+      routes:
+      #将qt-service提供的服务隐藏起来,不暴露给客户端,只给客户端暴露API网关的地址
+      - id: qt-service    #天气服务
+        uri: lb://qt-service
+        predicates:
+        - Path=/tianqi/**
+      - id: test-service     #测试服务
+        uri: lb://test-service
+        predicates:
+        - Path=/test/**
+      - id: config-clent-service  #配置客户端服务
+        uri: lb://config-clent-service
+        predicates:
+        - Path=/configclient/**
+      - id: city-service       #城市服务
+        uri: lb://city-service
+        predicates:
+        - Path=/city/**
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:30001/eureka/   #注册中心地址

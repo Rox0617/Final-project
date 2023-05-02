@@ -1,0 +1,26 @@
+server:
+  port: 30004   #端口号
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:30001/eureka/   #注册中心地址
+    registry-fetch-interval-seconds: 5     #修改缓存清单的更新时间
+spring:
+  application:
+    name: config-service      #注册到服务中心的名称
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/jiangxianshengqiaonvshi/spring-cloud_config.git   #github上面的git仓库地址
+          search-paths:
+            #搜索名称
+            - spring-cloud_config
+            ## 如果Git仓库为公开仓库，可以不填写用户名和密码，如果是私有仓库需要填写
+            #用户名
+          #username: *****
+          #密码
+         # password: ****
+      #读取master分支
+      label: master
+
